@@ -15,7 +15,9 @@ if ! dpkg-query -W docker-ce; then
 fi
 
 if ! dpkg-query -W nvidia-docker2; then
-  # Pinn to a specific version of docker-ce and nvidia-docker2.
+  # Pin to a specific version of docker-ce and nvidia-docker2.
   sudo apt-get install -y nvidia-docker2=2.0.3+docker17.09.1-1 nvidia-container-runtime=2.0.0+docker17.09.1-1
+  # reload the Docker daemon configuration.
+  sudo pkill -SIGHUP dockerd
 fi
 
