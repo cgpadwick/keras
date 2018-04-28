@@ -2,7 +2,7 @@
 
 This repo was written to enable users to get up and running with Keras very quickly.  You may have heard of Francios Challot's book "Deep Learning With Python" (https://www.manning.com/books/deep-learning-with-python).  The book teaches you the ins and out of Keras by using jupyter notebooks.
 
-Installation of Keras and Tensorflow can be pretty tricky.  If you want to run on the GPU, you have to make sure that the version of CUDA that you install is compatible with Tensorflow (https://www.tensorflow.org/).  The instructions in the book are out of date and do not work.
+Installation of Keras and Tensorflow can be pretty tricky.  If you want to run on the GPU, you have to make sure that the version of CUDA that you install is compatible with Tensorflow (https://www.tensorflow.org/).  The instructions in the book are out of date and do not work.  If you are not a grizzled deep learning veteran, you could get pretty frustrated.
 
 ## Quickstart
 
