@@ -1,0 +1,6 @@
+#!/bin/bash
+
+./install_cuda.bsh
+./install_docker.bsh
+
+

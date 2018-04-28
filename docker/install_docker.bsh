@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Install docker first.
+if ! dpkg-query -W docker-ce; then
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  sudo apt-get update
+  apt-cache policy docker-ce
+  sudo apt-get install -y docker-ce=17.09.1~ce-0~ubuntu
+  # Check and make sure the status of the docker service is ok.
+  sudo systemctl --no-pager status docker
+
+  # Make it so that you don't need sudo to run the docker commands.
+  sudo gpasswd -a $USER docker
+fi
+
+if ! dpkg-query -W nvidia-docker2; then
+  # Pinn to a specific version of docker-ce and nvidia-docker2.
+  sudo apt-get install -y nvidia-docker2=2.0.3+docker17.09.1-1 nvidia-container-runtime=2.0.0+docker17.09.1-1
+fi
+
