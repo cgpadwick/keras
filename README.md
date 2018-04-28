@@ -8,7 +8,7 @@ Installation of Keras and Tensorflow can be pretty tricky.  If you want to run o
 
 Clone this repo, setup your host (Ubuntu 16.04) with cuda and docker. 
 ```
-git clone fdsaf
+git clone git@github.com:cgpadwick/keras.git
 cd keras/docker
 make setup_host
 ```
