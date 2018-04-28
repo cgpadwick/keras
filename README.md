@@ -29,3 +29,5 @@ Copy and paste the token printed on the screen (something like http://0.0.0.0:88
 
 ![Alt text](screenshot.png?raw=true "Keras notebook running in a docker container")
 
+Use Ctrl-C to stop the notebook server and exit the docker container.
+
