@@ -21,7 +21,7 @@ cd data
 git clone https://github.com/fchollet/deep-learning-with-python-notebooks
 ```
 
-Start up a jupyter notebook inside the docker container.
+Start up a jupyter notebook inside the docker container.  The notebook code will be mounted in the container under /home/ubuntu/data.
 ```
 nvidia-docker run -it -p 8888:8888 -v ~/data:/home/ubuntu/data cgpadwick/keras-containers:keras-gpu /bin/bash -c "jupyter notebook --ip 0.0.0.0"
 ```
