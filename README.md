@@ -6,11 +6,11 @@ Installation of Keras and Tensorflow can be pretty tricky.  If you want to run o
 
 ## Quickstart
 
-Clone this repo, setup your host (Ubuntu 16.04) with cuda and docker. 
+Clone this repo, setup your host (Ubuntu 16.04) with docker.  If your host machine has a cuda enabled GPU, set GPU=1. 
 ```
 git clone git@github.com:cgpadwick/keras.git
 cd keras/docker
-make setup_host
+make setup_host GPU=0
 ```
 
 Clone the notebook code from the Deep Learning With Python repo.
@@ -22,8 +22,15 @@ git clone https://github.com/fchollet/deep-learning-with-python-notebooks
 ```
 
 Start up a jupyter notebook inside the docker container.  The notebook code will be mounted in the container under /home/ubuntu/data.
+
+For a GPU enabled docker:
 ```
-nvidia-docker run -it -p 8888:8888 -v ~/data:/home/ubuntu/data cgpadwick/keras-containers:keras-gpu /bin/bash -c "jupyter notebook --ip 0.0.0.0"
+sudo nvidia-docker run -it -p 8888:8888 -v ~/data:/home/ubuntu/data cgpadwick/keras-containers:keras-gpu /bin/bash -c "jupyter notebook --ip 0.0.0.0"
+```
+
+For a CPU-only docker:
+```
+sudo nvidia-docker run -it -p 8888:8888 -v ~/data:/home/ubuntu/data cgpadwick/keras-containers:keras-cpu /bin/bash -c "jupyter notebook --ip 0.0.0.0"
 ```
 Copy and paste the token printed on the screen (something like http://0.0.0.0:8888/?token=gobbledegook) into a browser and hopefully you will see something like this:
 
