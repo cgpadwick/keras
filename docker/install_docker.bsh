@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Install docker first.
+# Install docker-ce.
 if ! dpkg-query -W docker-ce; then
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
   sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
@@ -12,22 +12,5 @@ if ! dpkg-query -W docker-ce; then
 
   # Make it so that you don't need sudo to run the docker commands.
   sudo gpasswd -a $USER docker
-fi
-
-if ! dpkg-query -W nvidia-docker2; then
-  docker volume ls -q -f driver=nvidia-docker | xargs -r -I{} -n1 docker ps -q -a -f volume={} | xargs -r docker rm -f
-  sudo apt-get purge -y nvidia-docker
-  sudo apt-get install -y nvidia-modprobe
-
-  # Add the package repositories
-  curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | \
-    sudo apt-key add -
-  curl -s -L https://nvidia.github.io/nvidia-docker/ubuntu16.04/amd64/nvidia-docker.list | \
-    sudo tee /etc/apt/sources.list.d/nvidia-docker.list
-  sudo apt-get update
-  # Pin to a specific version of docker-ce and nvidia-docker2.
-  sudo apt-get install -y nvidia-docker2=2.0.3+docker17.09.1-1 nvidia-container-runtime=2.0.0+docker17.09.1-1
-  # reload the Docker daemon configuration.
-  sudo pkill -SIGHUP dockerd
 fi
 

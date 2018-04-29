@@ -2,11 +2,14 @@ SHELL = /bin/bash
 
 GPU := 1
 DOCKERCMD = nvidia-docker
-TAG = cgpadwick/keras-containers:keras-gpu
+DISTRO := ubuntu-16.04
+TFVER := $(shell cat requirements-gpu.txt | grep tensorflow | tr -d '[:space:]' | sed -e s/==/-/g)
+TAG = cgpadwick/keras-containers:keras-$(DISTRO)-$(TFVER)
 DOCKERFILE = Dockerfile-gpu
 ifeq ($(GPU), 0)
   DOCKERCMD = docker
-  TAG = cgpadwick/keras-containers:keras-cpu
+  TFVER := $(shell cat requirements-cpu.txt | grep tensorflow | tr -d '[:space:]' | sed -e s/==/-/g)
+  TAG = cgpadwick/keras-containers:keras-$(DISTRO)-$(TFVER)
   DOCKERFILE = Dockerfile-cpu
 endif
 
@@ -31,7 +34,9 @@ dockerclean:
 .PHONY: setup_host
 setup_host:
 ifeq ($(GPU), 1)
-	sudo ./setup_host.bsh
+	sudo ./install_cuda.bsh
+	sudo ./install_docker.bsh
+	sudo ./install_nvidia_docker.bsh
 else
 	sudo ./install_docker.bsh
 endif
