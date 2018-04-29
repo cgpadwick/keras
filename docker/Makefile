@@ -1,21 +1,29 @@
 SHELL = /bin/bash
 
-docker:
-	nvidia-docker build -t cgpadwick/keras-containers:keras-gpu -f Dockerfile .
+GPU := 1
+DOCKERCMD = nvidia-docker
+TAG = cgpadwick/keras-containers:keras-gpu
+DOCKERFILE = Dockerfile-gpu
+ifeq ($(GPU), 0)
+  DOCKERCMD = docker
+  TAG = cgpadwick/keras-containers:keras-cpu
+  DOCKERFILE = Dockerfile-cpu
+endif
 
-.PHONY: setup_host
-setup_host: 
-	sudo ./setup_host.bsh
+docker:
+	sudo $(DOCKERCMD) build -t $(TAG) -f $(DOCKERFILE) .
 
 test: docker
-	nvidia-docker run -it -p 8888:8888 cgpadwick/keras-containers:keras-gpu /bin/bash -c "cd code/keras/; python examples/mnist_cnn.py"
+	sudo $(DOCKERCMD) run -it -p 8888:8888 $(TAG) /bin/bash -c "cd code/keras/; python examples/mnist_cnn.py"
 
 smoketest: docker
-	nvidia-docker run -it -p 8888:8888 cgpadwick/keras-containers:keras-gpu /bin/bash -c "nvidia-smi"
-	nvidia-docker run -it -p 8888:8888 cgpadwick/keras-containers:keras-gpu /bin/bash -c "python tf_validate.py"
-	nvidia-docker run -it -p 8888:8888 cgpadwick/keras-containers:keras-gpu /bin/bash -c "./run_benchmark.bsh"
+	sudo $(DOCKERCMD) run -it -p 8888:8888 $(TAG) /bin/bash -c "python tf_validate.py"
+ifeq ($(GPU), 1)
+	sudo $(DOCKERCMD) run -it -p 8888:8888 $(TAG) /bin/bash -c "nvidia-smi"
+	sudo $(DOCKERCMD) run -it -p 8888:8888 $(TAG) /bin/bash -c "./run_benchmark.bsh"
+endif
 
-clean:
+dockerclean:
 	- docker stop $(docker ps -a -q)
 	- docker rm -f $(docker ps -a -q)
 	- docker images -q | xargs docker rmi -f
