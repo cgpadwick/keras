@@ -30,7 +30,7 @@ sudo nvidia-docker run -it -p 8888:8888 -v ~/data:/home/ubuntu/data cgpadwick/ke
 
 For a CPU-only docker:
 ```
-sudo nvidia-docker run -it -p 8888:8888 -v ~/data:/home/ubuntu/data cgpadwick/keras-containers:keras-cpu /bin/bash -c "jupyter notebook --ip 0.0.0.0"
+sudo docker run -it -p 8888:8888 -v ~/data:/home/ubuntu/data cgpadwick/keras-containers:keras-cpu /bin/bash -c "jupyter notebook --ip 0.0.0.0"
 ```
 Copy and paste the token printed on the screen (something like http://0.0.0.0:8888/?token=gobbledegook) into a browser and hopefully you will see something like this:
 
