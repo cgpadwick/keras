@@ -28,6 +28,14 @@ dockerclean:
 	- docker rm -f $(docker ps -a -q)
 	- docker images -q | xargs docker rmi -f
 
+.PHONY: setup_host
+setup_host:
+ifeq ($(GPU), 1)
+	sudo ./setup_host.bsh
+else
+	sudo ./install_docker.bsh
+endif
+
 .PHONY: push
 push:	
 	docker push cgpadwick/keras-containers
