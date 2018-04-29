@@ -38,5 +38,5 @@ endif
 
 .PHONY: push
 push:	
-	docker push cgpadwick/keras-containers
+	sudo docker push cgpadwick/keras-containers
 
