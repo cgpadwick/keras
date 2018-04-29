@@ -25,12 +25,12 @@ Start up a jupyter notebook inside the docker container.  The notebook code will
 
 For a GPU enabled docker:
 ```
-sudo nvidia-docker run -it -p 8888:8888 -v ~/data:/home/ubuntu/data cgpadwick/keras-containers:keras-gpu /bin/bash -c "jupyter notebook --ip 0.0.0.0"
+sudo nvidia-docker run -it -p 8888:8888 -v ~/data:/home/ubuntu/data cgpadwick/keras-containers:keras-ubuntu-16.04-tensorflow-gpu-1.8.0 /bin/bash -c "jupyter notebook --ip 0.0.0.0"
 ```
 
 For a CPU-only docker:
 ```
-sudo docker run -it -p 8888:8888 -v ~/data:/home/ubuntu/data cgpadwick/keras-containers:keras-cpu /bin/bash -c "jupyter notebook --ip 0.0.0.0"
+sudo docker run -it -p 8888:8888 -v ~/data:/home/ubuntu/data cgpadwick/keras-containers:keras-ubuntu-16.04-tensorflow-1.8.0 /bin/bash -c "jupyter notebook --ip 0.0.0.0"
 ```
 Copy and paste the token printed on the screen (something like http://0.0.0.0:8888/?token=gobbledegook) into a browser and hopefully you will see something like this:
 
