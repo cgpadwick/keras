@@ -4,6 +4,8 @@ This repo was written to enable users to get up and running with Keras very quic
 
 Installation of Keras and Tensorflow can be pretty tricky.  If you want to run on the GPU, you have to make sure that the version of CUDA that you install is compatible with Tensorflow (https://www.tensorflow.org/).  The instructions in the book are out of date and do not work.  If you are not a grizzled deep learning veteran, you could get pretty frustrated.
 
+This guide is intended to get you up and running on either the CPU or the GPU as quickly as possible.
+
 ## Quickstart
 
 Clone this repo, setup your host (Ubuntu 16.04) with docker.  If your host machine has a cuda enabled GPU, set GPU=1. 
