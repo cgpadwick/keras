@@ -1,0 +1,7 @@
+tensorflow
+keras
+pandas
+scikit-learn
+scikit-image
+jupyter
+tqdm

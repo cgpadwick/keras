@@ -4,9 +4,24 @@ This repo was written to enable users to get up and running with Keras very quic
 
 Installation of Keras and Tensorflow can be pretty tricky.  If you want to run on the GPU, you have to make sure that the version of CUDA that you install is compatible with Tensorflow (https://www.tensorflow.org/).  The instructions in the book are out of date and do not work.  If you are not a grizzled deep learning veteran, you could get pretty frustrated.
 
-This guide is intended to get you up and running on either the CPU or the GPU as quickly as possible.
+This guide is intended to get you up and running on either the CPU or the GPU as quickly as possible.  If you don;t want to use docker, then follow the instructions in the sectioan called "Build A Virtual Enviroment".  If you want to use docker, skip to the "Docker Quickstart" section.
 
-## Quickstart
+## Build A Virtual Environment
+
+```
+git clone git@github.com:cgpadwick/keras.git
+cd keras/venv
+
+# For a CPU build of tensorflow use:
+make GPU=0
+
+# If you watn GPU support (requires separate CUDA setup and install) use this:
+make GPU=1
+```
+
+Now you can type `source venv/keras_venv/bin/activate` and you should have a fully functional keras/tensorflow python virtual environment.
+
+## Docker Quickstart
 
 Clone this repo, setup your host (Ubuntu 16.04) with docker.  If your host machine has a cuda enabled GPU, set GPU=1. 
 ```
